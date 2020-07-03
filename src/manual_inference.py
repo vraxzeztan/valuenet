@@ -133,6 +133,9 @@ if __name__ == '__main__':
 
     # load the pre-trained parameters
     model.load_state_dict(torch.load(args.model_to_load))
+    # to use cpu instead of gpu , uncomment this code
+    # model.load_state_dict(torch.load(args.model_to_load,map_location=torch.device('cpu')))
+
     model.eval()
     print("Load pre-trained model from '{}'".format(args.model_to_load))
 
