@@ -17,6 +17,7 @@ tokenized_question = None
 db_value_finder = DatabaseValueFinder()
 
 values = []
+
 for token in tokenized_question:
     if token not in stopwords and token not in potential_values:
         match = db_value_finder(token, None)
