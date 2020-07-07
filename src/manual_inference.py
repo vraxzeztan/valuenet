@@ -111,9 +111,9 @@ def _remove_spaces(sentence):
     s = " ".join(s)
     return s
 
-def _find_nums(sentence):
+def _find_nums(tokenized_question):
     nums = []
-    for word in sentence.split():
+    for word in tokenized_question:
         if word.isnumeric():
             nums.append(word)
     return nums
@@ -154,7 +154,6 @@ if __name__ == '__main__':
         question = input(colored(
             f"You are using the database '{args.database}'. Type your question:", 'green', attrs=['bold']))
         question = _remove_spaces(question)
-        nums = _find_nums(question)
         dict['question'] = question
         if(question == '`'):
             break
@@ -170,6 +169,7 @@ if __name__ == '__main__':
             print(colored(
                 f"question has been tokenized to : { row['question_toks'] }", 'cyan', attrs=['bold']))
 
+            nums = _find_nums(row['question_toks'])
             data, table = merge_data_with_schema(schemas_raw, [row])
 
             pre_processed_data = process_datas(
