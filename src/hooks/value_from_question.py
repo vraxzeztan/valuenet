@@ -23,3 +23,5 @@ for token in tokenized_question:
         val, col, table = match
         if(val in col_val_map[col]):
             values.append(val)
+
+return values
