@@ -19,7 +19,7 @@ from spider.example_builder import build_example
 from utils import setup_device, set_seed_everywhere
 
 from spacy.lang.en import English
-
+from hooks.value_from_question import value_from_question
 from termcolor import colored
 
 
@@ -52,8 +52,10 @@ def _pre_process_values(row):
     # row['ner_extracted_values'] = ner_results['entities']
 
     extracted_values = pre_process(row)
-
     row['values'] = match_values_in_database(row['db_id'], extracted_values)
+    # hook call
+    my_vals = value_from_question(row['db_id'], row['question_toks'], row['values'])
+    row['values'] = list(set(my_vals + row['values']))
 
     return row
 
