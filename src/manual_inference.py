@@ -113,11 +113,8 @@ def _remove_spaces(sentence):
     s = " ".join(s)
     return s
 
-def _find_nums(tokenized_question):
-    nums = []
-    for word in tokenized_question:
-        if word.isnumeric():
-            nums.append(word)
+def _find_nums(question):
+    nums = re.findall('\d*\.?\d+', question)
     return nums
 
 
